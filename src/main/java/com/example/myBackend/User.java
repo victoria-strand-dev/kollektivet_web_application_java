@@ -1,7 +1,6 @@
 package com.example.myBackend;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
 @Entity
@@ -9,33 +8,42 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String user_password;
-    private String user_email;
+    private String password;
+    private String email;
     private String first_name;
     private String last_name;
-    private Long user_phone;
-    private String user_study;
-    private String user_work;
-    private LocalDate user_birthday;
+    private Long phone;
+    private String study;
+    private String work;
+    private LocalDate birthday;
 
     //@ManyToOne
     //@JoinColumn(name_spm? = "co_living_id")
     //private Co_living co_living;
+    @OneToOne(mappedBy = "user")
+    private Room room;
 
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
 
     public User() {}
 
     public User(String pass, String email,
                 String first_name, String last_name, Long phone,
                 String study, String work, LocalDate birthday) {
-        this.user_password = pass;
-        this.user_email = email;
+        this.password = pass;
+        this.email = email;
         this.first_name = first_name;
         this.last_name = last_name;
-        this.user_phone = phone;
-        this.user_study = study;
-        this.user_work = work;
-        this.user_birthday = birthday;
+        this.phone = phone;
+        this.study = study;
+        this.work = work;
+        this.birthday = birthday;
     }
 
     public Long getId() {
@@ -43,20 +51,20 @@ public class User {
     }
 
 
-    public String getUser_password() {
-        return user_password;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUser_password(String user_password) {
-        this.user_password = user_password;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
-        return user_email;
+        return email;
     }
 
-    public void setEmail(String user_email) {
-        this.user_email = user_email;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFirst_name() {
@@ -75,36 +83,36 @@ public class User {
         this.last_name = last_name;
     }
 
-    public Long getUser_phone() {
-        return user_phone;
+    public Long getPhone() {
+        return phone;
     }
 
-    public void setUser_phone(Long user_phone) {
-        this.user_phone = user_phone;
+    public void setPhone(Long phone) {
+        this.phone = phone;
     }
 
-    public String getUser_study() {
-        return user_study;
+    public String getStudy() {
+        return study;
     }
 
-    public void setUser_study(String user_study) {
-        this.user_study = user_study;
+    public void setStudy(String study) {
+        this.study = study;
     }
 
-    public String getUser_work() {
-        return user_work;
+    public String getWork() {
+        return work;
     }
 
-    public void setUser_work(String user_work) {
-        this.user_work = user_work;
+    public void setWork(String work) {
+        this.work = work;
     }
 
-    public LocalDate getUser_birthday() {
-        return user_birthday;
+    public LocalDate getBirthday() {
+        return birthday;
     }
 
-    public void setUser_birthday(LocalDate user_birthday) {
-        this.user_birthday = user_birthday;
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
     }
 
 }
