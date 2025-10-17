@@ -13,6 +13,7 @@ Start:
 9. Test more to get the hang of things, then start working on the real project
 
 - Alternative to the paid version Ultimate IntelliJ is https://start.spring.io/ . This generates a zip-file that one can open through IntelliJ with all the right setup. Remember to adjust "application.properties" so it connects successfully to the MySQL Workbench and the correct database.
+- The database must be created manually in MySQL Workbench so that Spring Boot gets something to connect to.
 
   
 16.10.2025:
