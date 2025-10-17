@@ -15,6 +15,7 @@ Start:
 - Alternative to the paid version Ultimate IntelliJ is https://start.spring.io/ . This generates a zip-file that one can open through IntelliJ with all the right setup. Remember to adjust "application.properties" so it connects successfully to the MySQL Workbench and the correct database. I don't know yet if you do this you don't have to do it again for the same procject or if it's a time- or spacelimit.
 - The database must be created manually in MySQL Workbench so that Spring Boot gets something to connect to.
 - To create connections between tables -> it's important to know/decide if the connection is OneToMany, ManyToOne etc..
+- To specify "null"/"not null" etc. from scripts themselves, one has to manually drop the tables from MySQL Workbench first since the hibernate doesn't override the colums/tables if they already exists.
 
   
 16.10.2025:
