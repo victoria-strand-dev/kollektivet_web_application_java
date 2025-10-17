@@ -23,4 +23,5 @@ Tried to replicate the code that ChatGPT made for me, and adjust it for each of 
 
 17.10.2025:
 Temporarily moved all the files that didn't corealate to the User-table/-class to make it easier to analyze the problem and fix it.
-Created new project to start over. Now without useing a git repository to make things as simple as possible for the learning process.
+Created a new project to start over. Now without using a git repository, to make things as simple as possible for the learning process.
+Created one table (User) to first check the connetion, then another (CoLiving) to check if both would work, then put in the realations between the two classes/tables to check if that worked, and then started adding spesifications to the different columns ("not null" etc.).
