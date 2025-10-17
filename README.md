@@ -11,3 +11,10 @@ Start:
 7. Create the database (mybackend_db) in MySQLWorkbench
 8. Create the first files and set up the project for testing (testing code created by OpenAI ChatGPT (2025)) that everything works -> create the first table in the database using java
 9. Test more to get the hang of things, then start working on the real project
+
+
+16.10.2025:
+Tried to replicate the code that ChatGPT made for me, and adjust it for each of the new tables (classes) I wanted to have in my project. Ended up not working -> the code ran without errors, but the datebase didn't get updated.
+
+17.10.2025:
+Temporarily moved all the files that didn't corealate to the User-table/-class to make it easier to analyze the problem and fix it.
