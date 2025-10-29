@@ -25,3 +25,7 @@ Tried to replicate the code that ChatGPT made for me, and adjust it for each of 
 Temporarily moved all the files that didn't corealate to the User-table/-class to make it easier to analyze the problem and fix it.
 Created a new project to start over. Now without using a git repository, to make things as simple as possible for the learning process.
 Created one table (User) to first check the connetion, then another (CoLiving) to check if both would work, then put in the realations between the two classes/tables to check if that worked, and then started adding spesifications to the different columns ("not null" etc.).
+
+29.10.2025:
+Made the room table in the database, and made relations to the coLiving table and user table. First I forgot to set the coLiving relation to Not Nullable, so I updated the code. The database did not get updatet. So I manually dropped the room table from the database and ran the code again. Then it worked. 
+Next task is to make the rest of the tables in the database. I think I'm going to make all the tables I am going to use/want to use -> I rather make more tables then needed now, so I know that they all work if I am going to use them, and rather drop the tables I potentially end up not using. Which tables I end up using depends on how much time I have.
