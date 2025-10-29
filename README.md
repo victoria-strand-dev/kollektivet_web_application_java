@@ -28,4 +28,5 @@ Created one table (User) to first check the connetion, then another (CoLiving) t
 
 29.10.2025:
 Made the room table in the database, and made relations to the coLiving table and user table. First I forgot to set the coLiving relation to Not Nullable, so I updated the code. The database did not get updatet. So I manually dropped the room table from the database and ran the code again. Then it worked. 
-Next task is to make the rest of the tables in the database. I think I'm going to make all the tables I am going to use/want to use -> I rather make more tables then needed now, so I know that they all work if I am going to use them, and rather drop the tables I potentially end up not using. Which tables I end up using depends on how much time I have.
+Made a simple script to test connection to web/localhost. The other classes that creates the database tables each have their own corelated repository-script. The script that is in charge of the frontend part/the webhosting(?) itself do not use this. 
+Question for myself: Tomcat for creating/connecting to SQL, but Tomcat turned off for localhost?
