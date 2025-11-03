@@ -17,6 +17,19 @@ Start:
 - To create connections between tables -> it's important to know/decide if the connection is OneToMany, ManyToOne etc..
 - To specify "null"/"not null" etc. from scripts themselves, one has to manually drop the tables from MySQL Workbench first since the hibernate doesn't override the colums/tables if they already exists.
 
+03.11.2025
+!IMPORTANT: What is what in my project/test project now? 
+--------------------------------------------------------
+1. myNewBackend -> myBackend is saved on gitHub, but something went wrong, so I made a new project and database. I haven't connected it to gitHub yet.
+2. C:\Users\Queen Victoria xoxo\OneDrive\USN_23_til_27\h25_usn\webutvikling\myNewBackend\src\main\java\com\example\myNewBackend:
+   - Java files for CoLiving, User, Calendar, Room
+   - Java repositories for CoLiving, User, Calendar, Room
+   - MyNewBackendApplication.java -> Main script that runs everything
+   - TestWebApp.java -> Contains both html and css (I want to link to 
+   - UserController.java ->
+...
+
+
   
 16.10.2025:
 Tried to replicate the code that ChatGPT made for me, and adjust it for each of the new tables (classes) I wanted to have in my project. Ended up not working -> the code ran without errors, but the datebase didn't get updated.
@@ -30,3 +43,7 @@ Created one table (User) to first check the connetion, then another (CoLiving) t
 Made the room table in the database, and made relations to the coLiving table and user table. First I forgot to set the coLiving relation to Not Nullable, so I updated the code. The database did not get updatet. So I manually dropped the room table from the database and ran the code again. Then it worked. 
 Made a simple script to test connection to web/localhost. The other classes that creates the database tables each have their own corelated repository-script. The script that is in charge of the frontend part/the webhosting(?) itself do not use this. 
 Question for myself: Tomcat for creating/connecting to SQL, but Tomcat turned off for localhost?
+
+03.11.2025:
+The current goal is to connect the frontend to the backend. For testing/learning I am following a guide from the Engineer's CodingHub website (https://engineerscodinghub.com/full-stack-web-application-using-spring-boot/), but adjusted to my project instead of the example project on the site (chose users instead of employees, etz.).
+Trying to make a table (localhoast:8081/users) that fetches data from the database, but there's something wrong somewhere. Still working on debugging.
