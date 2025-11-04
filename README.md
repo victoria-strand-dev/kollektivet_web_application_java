@@ -58,4 +58,6 @@ import com.example.myNewBackend.models.User; (imported the User-class).
 
 I have finally fixed the problems (with the help of ChatGPT)! ChatGPT has given me a few very simple codes just to make everything work. Now I am going to use this base(?) to further build my project and connect it to all the already existing files I made in the php-version of the project.
 
-I've added a couple of css files and files that I "converted" from php to regular html that uses JS to connect to the backend part. I delted all php-code, therefor i must edit the files to "get back" the same functionalities, but all html and css work. Before I start adjusting the code that connects to the database, I want to test if I can use more than one css file per html-file. I hope that if that's possible, I can have ONE css-file that all thml-files can use, and add shorter, more spesific css-files for each html-file (if needed).
+I've added a couple of css files and files that I "converted" from php to regular html that uses JS to connect to the backend part. I delted all php-code, therefor i must edit the files to "get back" the same functionalities, but all html and css work. Before I start adjusting the code that connects to the database, I want to test if I can use more than one css file per html-file. I hope that if that's possible, I can have ONE css-file that all thml-files can use, and add shorter, more spesific css-files for each html-file (if needed). It worked!
+
+--- Question to myself: Session() in php, how do I do that in this project? ---
