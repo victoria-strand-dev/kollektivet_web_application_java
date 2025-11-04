@@ -47,3 +47,6 @@ Question for myself: Tomcat for creating/connecting to SQL, but Tomcat turned of
 03.11.2025:
 The current goal is to connect the frontend to the backend. For testing/learning I am following a guide from the Engineer's CodingHub website (https://engineerscodinghub.com/full-stack-web-application-using-spring-boot/), but adjusted to my project instead of the example project on the site (chose users instead of employees, etz.).
 Trying to make a table (localhoast:8081/users) that fetches data from the database, but there's something wrong somewhere. Still working on debugging.
+
+04.11.2025:
+The goal for today is to find the problem from yesterday, then start on the frontend part of the project. TestWebApp.java that runs on http://localhost:8081/ is working. It's a simple, static web page That just shows a text with basic CSS for coloring and font size, and a link just for testing. The problem lays in one or more of the following files: NewUserController.java, users.html, pom.xml. The error-message in pom.xml is: "Dependency 'org.springframework.boot:spring-boot-starter-thymeleaf:3.3.4' not found". In users.html the error-messages are: "URI is not registered (Settings | Languages & Frameworks | Schemas and DTDs)" and "Attribute th:text is not allowed here".
