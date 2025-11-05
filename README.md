@@ -17,6 +17,8 @@ Start:
 - To create connections between tables -> it's important to know/decide if the connection is OneToMany, ManyToOne etc..
 - To specify "null"/"not null" etc. from scripts themselves, one has to manually drop the tables from MySQL Workbench first since the hibernate doesn't override the colums/tables if they already exists.
 
+--- Question to myself: Session() in php, how do I do that in this project? ---
+
 03.11.2025
 !IMPORTANT: What is what in my project/test project now? 
 --------------------------------------------------------
@@ -24,9 +26,12 @@ Start:
 2. C:\Users\Queen Victoria xoxo\OneDrive\USN_23_til_27\h25_usn\webutvikling\myNewBackend\src\main\java\com\example\myNewBackend:
    - Java files for CoLiving, User, Calendar, Room
    - Java repositories for CoLiving, User, Calendar, Room
+   - Java controllers for CoLiving, User, Calendar, Room
    - MyNewBackendApplication.java -> Main script that runs everything
-   - TestWebApp.java -> Contains both html and css (I want to link to 
-   - UserController.java ->
+   - TestWebApp.java -> Contains both html and css (I want to link to ..
+   - HTML og CSS for login, create_coLiving, calendar, join_coLiving, profile, residents
+   - common.css -> CSS-file that all the html-files use 
+   - index.html, test.html, new_user.html
 ...
 
 
@@ -50,16 +55,18 @@ Trying to make a table (localhoast:8081/users) that fetches data from the databa
 
 04.11.2025:
 The goal for today is to find the problem from yesterday, then start on the frontend part of the project. TestWebApp.java that runs on http://localhost:8081/ is working. It's a simple, static web page That just shows a text with basic CSS for coloring and font size, and a link just for testing. The problem lays in one or more of the following files: NewUserController.java, users.html, pom.xml. The error-message in pom.xml is: "Dependency 'org.springframework.boot:spring-boot-starter-thymeleaf:3.3.4' not found". In users.html the error-messages are: "URI is not registered (Settings | Languages & Frameworks | Schemas and DTDs)" and "Attribute th:text is not allowed here".
-
 Have adjusted, edited, deleted, moved etz. and corrected som minor detail with names in the different codes. Changed from ex. userRepository to UserRepository, and made three folders inside the backend-folder (MyNewBackend) -> models, controllers and repositories. Made a frontend folder in the same folder that the backend folder is in (Webutvikling). Heres the biggest/most important problem i fixed: 
 package com.example.myNewBackend.controllers; (added "controllers" since the file is now in another folder).
 import com.example.myNewBackend.repositories.UserRepository; (imported the UserRepository-class).
 import com.example.myNewBackend.models.User; (imported the User-class).
-
 I have finally fixed the problems (with the help of ChatGPT)! ChatGPT has given me a few very simple codes just to make everything work. Now I am going to use this base(?) to further build my project and connect it to all the already existing files I made in the php-version of the project.
-
 Something I've learned today: Models -> Repositories -> Controllers -> html/css/etc. :: One only need to make controllers and repositories for the models to fetch data from the database tables.
-
 I've added a couple of css files and files that I "converted" from php to regular html that uses JS to connect to the backend part. I delted all php-code, therefor i must edit the files to "get back" the same functionalities, but all html and css work. Before I start adjusting the code that connects to the database, I want to test if I can use more than one css file per html-file. I hope that if that's possible, I can have ONE css-file that all thml-files can use, and add shorter, more spesific css-files for each html-file (if needed). It worked!
 
---- Question to myself: Session() in php, how do I do that in this project? ---
+05.11.2025:
+I (ChatGPT) figured out why the data for users were shown in the table on index.html, but not the data for the coLivings-table. I had to add @JsonIgnore to the coLiving-relation in User.java ->     
+@ManyToOne
+@JoinColumn(name = "co_living_id")    
+@JsonIgnore
+private CoLiving coLiving;
+But why?
