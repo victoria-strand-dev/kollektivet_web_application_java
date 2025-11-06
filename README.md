@@ -70,3 +70,9 @@ I (ChatGPT) figured out why the data for users were shown in the table on index.
 @JsonIgnore
 private CoLiving coLiving;
 But why?
+new task -> trying to add the following to UserController.java :
+@PostMapping
+public User addUser(@RequestBody User user) {
+    return userRepository.save(user);
+}
+-> didn't change anything -> trying to change the names in new_user.html to match the variables(?) in User.java -> didn't change anything -> I read the error-message in Intellij and figured that I were trying to add a new user with null values in not nullable spaces
