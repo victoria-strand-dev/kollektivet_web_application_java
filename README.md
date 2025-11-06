@@ -79,4 +79,8 @@ public User addUser(@RequestBody User user) {
 
 06.11.2025:
 I figured out why I couldn't register a user from the new_user.html. It was both that I used different names (first_name vs firstName), and that I used the same e-mail and telephone number several times, but these fields are "unique". Now it worked! Time to use the test codes and incorporate them in my actual project. Now there's no code (script) in my html-files that connects with the database.
-Got the register-scheme for login.html file to work, but haven't started on the login-part. Continued with calendar.html instead since it uses the same functionality as registering.
+Got the register-scheme for login.html file to work, but haven't started on the login-part. Continued with calendar.html instead since it uses the same functionality as registering. Problem fixed by adding @PostMapping in CalendarController.java:
+    @PostMapping
+    public Calendar addUser(@RequestBody Calendar event) {
+        return userRepository.save(event); }
+Now i'm going to add this to RoomController.java and CoLivingController.java as well. After that I will continue to work on create_coLiving.html.
