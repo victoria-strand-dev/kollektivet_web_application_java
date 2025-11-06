@@ -84,3 +84,4 @@ Got the register-scheme for login.html file to work, but haven't started on the 
     public Calendar addUser(@RequestBody Calendar event) {
         return userRepository.save(event); }
 Now i'm going to add this to RoomController.java and CoLivingController.java as well. After that I will continue to work on create_coLiving.html.
+I am now working on create_coLiving.html, but I think I have to find some way to automatically create a invite code when creating the coliving.
