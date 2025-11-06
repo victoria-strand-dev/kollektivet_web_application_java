@@ -76,3 +76,6 @@ public User addUser(@RequestBody User user) {
     return userRepository.save(user);
 }
 -> didn't change anything -> trying to change the names in new_user.html to match the variables(?) in User.java -> didn't change anything -> I read the error-message in Intellij and figured that I were trying to add a new user with null values in not nullable spaces
+
+06.11.2025:
+I figured out why I couldn't register a user from the new_user.html. It was both that I used different names (first_name vs firstName), and that I used the same e-mail and telephone number several times, but these fields are "unique". Now it worked! Time to use the test codes and incorporate them in my actual project. Now there's no code (script) in my html-files that connects with the database.
