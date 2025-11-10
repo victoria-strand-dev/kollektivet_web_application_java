@@ -85,3 +85,6 @@ Got the register-scheme for login.html file to work, but haven't started on the 
         return userRepository.save(event); }
 Now i'm going to add this to RoomController.java and CoLivingController.java as well. After that I will continue to work on create_coLiving.html.
 I am now working on create_coLiving.html, but I think I have to find some way to automatically create a invite code when creating the coliving.
+
+10.11.2025:
+Plan/goal for today: Fix the problems with the join_coLiving.html + create/update profile.html to fulfill the CRUD requirements. Without session() functionality (in PHP) most of the functionalities in the webapplication doesn't do anything. Therefore I need to figuere out the Java equivalent for PHP session(). Important: privacy/sequrity, stay in the session even when refreshing or changing site. After this is completed I need to make the logout.html file where the session is ended.
