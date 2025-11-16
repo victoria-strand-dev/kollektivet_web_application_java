@@ -24,8 +24,8 @@ Start:
 --------------------------------------------------------
 1. myNewBackend -> myBackend is saved on gitHub, but something went wrong, so I made a new project and database. I haven't connected it to gitHub yet.
 2. C:\Users\Queen Victoria xoxo\OneDrive\USN_23_til_27\h25_usn\webutvikling\myNewBackend\src\main\java\com\example\myNewBackend:
-   - Java files for CoLiving, User, Calendar, Room
-   - Java repositories for CoLiving, User, Calendar, Room
+   - Java models for CoLiving, User, Calendar, Room
+   - Java repositories for CoLiving, User, Calendar, Room, Login
    - Java controllers for CoLiving, User, Calendar, Room
    - MyNewBackendApplication.java -> Main script that runs everything
    - TestWebApp.java -> Contains both html and css (I want to link to ..
@@ -89,6 +89,9 @@ I am now working on create_coLiving.html, but I think I have to find some way to
 10.11.2025:
 Plan/goal for today: Fix the problems with the join_coLiving.html + create/update profile.html to fulfill the CRUD requirements. Without session() functionality (in PHP) most of the functionalities in the webapplication doesn't do anything. Therefore I need to figuere out the Java equivalent for PHP session(). Important: privacy/sequrity, stay in the session even when refreshing or changing site. After this is completed I need to make the logout.html file where the session is ended. 
 --Reminder/tips to myself: Ideally there should be two different (...). One for the users/residents and one for the ones who rent out. There should be a function in the "rent out/landlord" version that sends out the invite code on either phone or e-mail or prints it out. Proposal to how I can devide the two: When logging in it checks if the user is a resident or landlord, and gives accsess to diferent functionalities based on this. But then, how is the role of the user registered? When seperating the admin/landlord and user sites, I should remove the "create_coLiving.html" path on the user site. On the admin/lanlord site the invite code that is generated when creating a coLiving should be possible to access and share. The admin site may not be the same for all landlords(?) since ONE landlord doesn't rent out ALL colivings, buta a landlord can rent out more than one coliving.--
+
+16.11.2025:
+Goal for today: Make a demo video of the project and my progress so far. Therefor I won't be changing too much in the code today.
 
 11.11.2025:
 --Reminder to myself: Hash password--
