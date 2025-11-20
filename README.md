@@ -96,3 +96,6 @@ Plan/goal for today: Continue on yesterdays plan.
 
 16.11.2025:
 Goal for today: Make a demo video of the project and my progress so far. Therefor I won't be changing too much in the code today.
+
+20.11.2025:
+Today's goal: Use the session function I got to work last time, to fix the functionality for profile.html where one should be able to update one's user based on who's logged in. Profile.html is where the requierd CRUD functionalities will be fulfilled. The create part and read part will be fulfilled in in login.html, and update and delete will be fulfilled in profile. Potentially the delete part will be moved to settings.html which is more common in "real" webapplications.
