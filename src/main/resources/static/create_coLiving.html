@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create coliving</title>
+    <link rel="stylesheet" href="create_coLiving.css"> <!-- husk: endre sti senere -->
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+<ul class="top_bar">
+    <li><a href="login.php">Logg inn</a></li>
+    <li><a href="profile.html">Profil</a></li>
+    <li><a href="in_progress.html">Innstillinger</a></li>
+    <li><a href="index.html">Hjem</a></li>
+</ul>
+
+<!-- MAIN CONTENT (side bar + innhold) -->
+<div class="main">
+    <ul class="side_bar">
+        <li><a href="in_progress.html">Handleliste</a></li>
+        <li><a href="calendar.html">Kalender</a></li>
+        <li><a href="in_progress.html">Vaskeliste</a></li>
+        <li><a href="in_progress.html">Husregler</a></li>
+        <li><a href="in_progress.html">Oppgjør</a></li>
+        <li><a href="residents.html">Beboere</a></li>
+        <li><a href="create_coLiving.html">Opprett kollektiv</a></li>
+        <li><a href="join_coLiving.html">Bli med i et kollektiv</a></li>
+    </ul>
+
+    <div class="content">
+        <div class="create_kollektiv">
+            <h2>Opprett kollektiv</h2>
+            <form id="newCoLivingForm">  <!-- fjernet method/action -->
+                <input id="name"      type="text"   placeholder="Navn på kollektiv">
+                <input id="address" type="text" placeholder="Adresse">
+                <button>Opprett kollektiv</button>
+            </form>
+            <script>
+                document.getElementById("newCoLivingForm").addEventListener("submit", async function (event) {
+                  event.preventDefault(); // Hindrer at siden refresher
+
+                  // Les verdier fra input-feltene
+                  const newCoLiving = {
+                    name: document.getElementById("name").value,
+                    address: document.getElementById("address").value
+                  };
+
+                  // Send POST-forespørsel til backend
+                  try {
+                    const response = await fetch("http://localhost:8081/api/coLivings", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify(newCoLiving)
+                    });
+
+                    if (!response.ok) {
+                      throw new Error("Feil ved lagring av kollektiv");
+                    }
+
+                    const result = await response.json();
+                    alert("Kollektiv lagret!");
+                  } catch (error) {
+                    console.error(error);
+                    alert("Kunne ikke lagre kollektiv");
+                  }
+                });
+            </script>
+        </div>
+    </div>
+</div>
+
+<!-- BOTTOM BAR -->
+<ul class="bottom_bar">
+    <li><a href="in_progress.html">Logg ut</a></li>
+</ul>
+</body>
+</html>

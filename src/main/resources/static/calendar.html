@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalender</title>
+    <link rel="stylesheet" href="calendar.css">
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+<!-- TOP BAR -->
+<ul class="top_bar">
+    <li><a href="login.html">Logg inn</a></li>
+    <li><a href="profile.html">Profil</a></li>
+    <li><a href="in_progress.html">Innstillinger</a></li>
+    <li><a href="index.html">Hjem</a></li>
+</ul>
+
+<!-- MAIN CONTENT -->
+<div class="menu">
+    <ul class="side_bar">
+        <li><a href="in_progress.html">Handleliste</a></li>
+        <li><a href="calendar.html">Kalender</a></li>
+        <li><a href="in_progress.html">Vaskeliste</a></li>
+        <li><a href="in_progress.html">Husregler</a></li>
+        <li><a href="in_progress.html">Oppgjør</a></li>
+        <li><a href="residents.html">Beboere</a></li>
+        <li><a href="create_coLiving.html">Opprett kollektiv</a></li>
+        <li><a href="join_coLiving.html">Bli med i et kollektiv</a></li>
+    </ul>
+
+    <div class="content">
+        <!--<div class="month">
+            <ul>
+                <li class="prev">&#10094;</li>
+                <li>
+                    <?php echo $month_name; ?><br>
+                    <span style="font-size:18px"><?php echo $year; ?></span>
+                </li>
+                <li class="next">&#10095;</li>
+            </ul>
+        </div>-->
+
+        <ul class="weekdays">
+            <li>Mandag</li>
+            <li>Tirsdag</li>
+            <li>Onsdag</li>
+            <li>Torsdag</li>
+            <li>Fredag</li>
+            <li>Lørdag</li>
+            <li>Søndag</li>
+        </ul>
+
+        <ul class="days">
+        </ul>
+        <h2>Legg til en hendelse</h2>
+        <div class="create_event">
+            <form id="newEventForm">  <!-- fjernet method/action -->
+                <input id="title"      type="text"   placeholder="Tittel">
+                <input id="description" type="text" placeholder="Beskrivelse">
+                <input id="date" type="date" placeholder="Dato">
+                <input id="startTime" type="time" placeholder="Starter">
+                <input id="endTime" type="time" placeholder="Slutter">
+                <input id="location" type="text" placeholder="Sted">
+                <button type="submit" type="register_event">Legg til</button>
+            </form>
+            <script>
+                document.getElementById("newEventForm").addEventListener("submit", async function (event) {
+                  event.preventDefault(); // Hindrer at siden refresher
+
+                  // Les verdier fra input-feltene
+                  const newEvent = {
+                    title: document.getElementById("title").value,
+                    description: document.getElementById("description").value,
+                    date: document.getElementById("date").value,
+                    startTime: document.getElementById("startTime").value,
+                    endTime: document.getElementById("endTime").value,
+                    location: document.getElementById("location").value
+                  };
+
+                  // Send POST-forespørsel til backend
+                  try {
+                    const response = await fetch("http://localhost:8081/api/events", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify(newEvent)
+                    });
+
+                    if (!response.ok) {
+                      throw new Error("Feil ved lagring av hendelse");
+                    }
+
+                    const result = await response.json();
+                    alert("Hendelse lagret!");
+                  } catch (error) {
+                    console.error(error);
+                    alert("Kunne ikke lagre hendelse");
+                  }
+                });
+            </script>
+        </div>
+    </div>
+</div>
+
+<!-- BOTTOM BAR -->
+<ul class="bottom_bar">
+    <li><a href="in_progress.html">Logg ut</a></li>
+</ul>
+</body>
+</html>

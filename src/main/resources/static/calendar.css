@@ -1,0 +1,92 @@
+/* KALENDER STYLING */
+/* KALENDER STYLING */
+.month {
+  padding: 10px 0;
+  background: var(--mid_blue);
+  text-align: center;
+}
+
+.month ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.month ul li {
+  color: var(--white);
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin: 0 15px;
+}
+
+.month .prev {
+  margin-right: auto;
+  cursor: pointer;
+}
+
+.month .next {
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.weekdays {
+  margin: 0;
+  padding: 10px 0;
+  background-color: var(--mid_grey_white);
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 like kolonner */
+  text-align: center;
+  list-style: none;
+}
+
+.weekdays li {
+  color: var(--dark_grey);
+  font-weight: bold;
+}
+
+.days {
+  margin: 0;
+  padding: 10px 0;
+  background: var(--grey);
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 like kolonner */
+  text-align: center;
+  gap: 5px;
+  text-decoration: none;
+}
+
+.days li {
+  list-style: none;
+  font-size: 14px;
+  color: var(---mid_grey_white);
+  padding: 8px;
+}
+
+.days li .active {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  background: var(--light_blue);
+  border-radius: 50%;
+  color: white !important;
+}
+
+
+/* Responsiv kalender */
+@media screen and (max-width:720px) {
+  .weekdays li, .days li {width: 13.1%;}
+}
+
+@media screen and (max-width: 420px) {
+  .weekdays li, .days li {width: 12.5%;}
+  .days li .active {padding: 2px;}
+}
+
+@media screen and (max-width: 290px) {
+  .weekdays li, .days li {width: 12.2%;}
+}

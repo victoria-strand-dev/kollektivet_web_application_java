@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css"> <!-- husk: endre sti senere -->
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+<ul class="top_bar">
+    <li><a href="login.php">Logg inn</a></li>
+    <li><a href="index.html">Hjem</a></li>
+    <li><a href="profile.html">Profil</a></li>
+    <li><a href="in_progress.html">Innstillinger</a></li>
+</ul>
+<!-- MAIN CONTENT (side bar + innhold) -->
+<div class="main">
+    <ul class="side_bar">
+        <li><a href="in_progress.html">Handleliste</a></li>
+        <li><a href="calendar.html">Kalender</a></li>
+        <li><a href="in_progress.html">Vaskeliste</a></li>
+        <li><a href="in_progress.html">Husregler</a></li>
+        <li><a href="in_progress.html">Oppgjør</a></li>
+        <li><a href="residents.html">Beboere</a></li>
+        <li><a href="create_coLiving.html">Opprett kollektiv</a></li>
+        <li><a href="join_coLiving.html">Bli med i et kollektiv</a></li>
+    </ul>
+
+    <div class="content">
+        <h2>Logg inn</h2>
+        <div class="login_register_container">
+            <form method="POST">
+                <input type="email" name="email" placeholder="e-post">
+                <input type="password" name="password" placeholder="Passord">
+                <button type="submit" name="login_user">Logg inn</button>
+            </form>
+            <h2>eller</h2>
+            <!-- Button to toggle registration -->
+            <button id="showRegisterBtn" type="button">Registrer ny bruker</button>
+            <form id="registerForm">  <!-- fjernet method/action -->
+                <input id="email"      type="email"   placeholder="e-post">
+                <input id="phone"      type="text"    placeholder="Telefonnummer">
+                <input id="password"   type="password" placeholder="Passord">
+                <input id="firstName"  type="text"    placeholder="Fornavn">
+                <input id="lastName"   type="text"    placeholder="Etternavn">
+                <input id="birthday"   type="date"    placeholder="Fødselsdato">
+                <input id="study"      type="text"    placeholder="Hva studerer du?">
+                <input id="work"       type="text"    placeholder="Hvor jobber du?">
+                <button type="submit">Registrer</button>
+            </form>
+            <script>
+                const btn = document.getElementById("showRegisterBtn");
+                const regForm = document.getElementById("registerForm");
+
+                btn.addEventListener("click", () => {
+                    if (regForm.style.display === "none") {
+                        regForm.style.display = "block";
+                        btn.textContent = "Skjul registrering";
+                    } else {
+                        regForm.style.display = "none";
+                        btn.textContent = "Registrer ny bruker";
+                    }
+                });
+            </script>
+            <script>
+                document.getElementById("registerForm").addEventListener("submit", async function (event) {
+                  event.preventDefault(); // Hindrer at siden refresher
+
+                  // Les verdier fra input-feltene
+                  const newUser = {
+                    email: document.getElementById("email").value,
+                    phone: document.getElementById("phone").value,
+                    password: document.getElementById("password").value,
+                    firstName: document.getElementById("firstName").value,
+                    lastName: document.getElementById("lastName").value,
+                    birthday: document.getElementById("birthday").value,
+                    work: document.getElementById("work").value,
+                    study: document.getElementById("study").value
+                  };
+
+                  // Send POST-forespørsel til backend
+                  try {
+                    const response = await fetch("http://localhost:8081/api/users", {
+                      method: "POST",
+                      credentials: "include",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify(newUser)
+                    });
+
+                    if (!response.ok) {
+                      throw new Error("Feil ved lagring av bruker");
+                    }
+
+                    const result = await response.json();
+                    alert("Bruker lagret! ID: " + result.id);
+                  } catch (error) {
+                    console.error(error);
+                    alert("Kunne ikke lagre bruker");
+                  }
+                });
+            </script>
+        </div>
+    </div>
+</div>
+<!-- BOTTOM BAR -->
+<ul class="bottom_bar">
+    <li><a href="in_progress.html">Logg ut</a></li>
+</ul>
+</body>
+</html>

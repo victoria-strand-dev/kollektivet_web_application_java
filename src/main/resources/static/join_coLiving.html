@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Join coliving</title>
+    <link rel="stylesheet" href="join_coLiving.css">
+    <link rel="stylesheet" href="common.css">
+</head>
+
+<header>
+    <h1>KOLLEKTIVET</h1>
+</header>
+
+<body>
+<ul class="top_bar">
+    <li><a href="login.php">Logg inn</a></li>
+    <li><a href="profile.html">Profil</a></li>
+    <li><a href="in_progress.html">Innstillinger</a></li>
+    <li><a href="index.html">Hjem</a></li>
+</ul>
+
+<!-- MAIN CONTENT (side bar + innhold) -->
+<div class="main">
+    <ul class="side_bar">
+        <li><a href="in_progress.html">Handleliste</a></li>
+        <li><a href="calendar.html">Kalender</a></li>
+        <li><a href="in_progress.html">Vaskeliste</a></li>
+        <li><a href="in_progress.html">Husregler</a></li>
+        <li><a href="in_progress.html">Oppgjør</a></li>
+        <li><a href="residents.html">Beboere</a></li>
+        <li><a href="create_coLiving.html">Opprett kollektiv</a></li>
+        <li><a href="join_coLiving.html">Bli med i et kollektiv</a></li>
+    </ul>
+
+    <div class="content">
+        <div class="join_kollektiv">
+            <h2>test inv</h2>
+            <form id="joinForm">
+                <label>
+                    Invitasjonskode:
+                    <input type="text" id="inviteCode" required>
+                </label><br>
+
+                <label>
+                    E-postadresse:
+                    <input type="email" id="email" required>
+                </label><br>
+
+                <button type="submit">Bli med</button>
+            </form>
+            <script>
+                document.getElementById("joinForm").addEventListener("submit", async (e) => {
+                  e.preventDefault();
+
+                  const inviteCode = document.getElementById("inviteCode").value.trim();
+                  const email = document.getElementById("email").value.trim();
+
+                  try {
+                    const response = await fetch(`http://localhost:8081/api/coLivings/joinByEmail?inviteCode=${inviteCode}&email=${email}`, {
+                      method: "POST"
+                    });
+
+                    const text = await response.text();
+                    alert(text);
+                  } catch (err) {
+                    console.error("Feil:", err);
+                    alert("Kunne ikke koble til serveren.");
+                  }
+                });
+            </script>
+        </div>
+    </div>
+</div>
+
+<!-- BOTTOM BAR -->
+<ul class="bottom_bar">
+    <li><a href="in_progress.html">Logg ut</a></li>
+</ul>
+</body>
+</html>

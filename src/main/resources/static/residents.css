@@ -1,0 +1,88 @@
+h1, h2, p {
+    text-align: center;
+    color: var(--dark_blue);
+}
+
+input {
+    display: block;
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid var(--dark_blue);
+    border-radius: 5px;
+
+}
+
+button {
+    display: block;
+    width: 95%;
+    margin: 10px auto;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--dark_blue);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* MAIN AREA */
+.main {
+    flex: 1;
+    display: flex;
+}
+
+/* CONTENT */
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: row;        /* 🔄 Endret fra column → row */
+    justify-content: flex-start;/* Venstrestilt */
+    align-items: flex-start;    /* Toppjustert */
+    padding: 20px;
+    background: var(--white);
+    color: var(--dark_blue);
+    text-align: center;
+}
+
+.room-grid {
+    display: flex;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 25px;
+    padding: 30px;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.door {
+    background-color: #7EA1BF;
+    border: 3px solid #486273;
+    border-radius: 6px;
+    box-shadow: #626262 1px 1px 2px;
+    height: 160px;
+    position: relative;
+    transition: transform 0.3s ease;
+    width: 120px;
+}
+
+.door:hover {
+    transform: scale(1.05);
+}
+
+.door-number {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-weight: bold;
+}
+
+.door-name {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+}

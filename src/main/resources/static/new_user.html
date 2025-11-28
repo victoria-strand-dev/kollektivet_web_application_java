@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Legg til bruker</title>
+</head>
+<body>
+<h1>Legg til ny bruker</h1>
+    <form id="userForm">
+    <label>Fornavn: <input type="text" id="firstName"></label><br>
+    <label>Etternavn: <input type="text" id="lastName"></label><br>
+    <label>E-post: <input type="email" id="email"></label><br>
+    <label>Telefon: <input type="text" id="phone"></label><br>
+    <label>Passord: <input type="text" id="password"></label><br>
+    <button type="submit">Legg til</button>
+</form>
+
+<script>
+    document.getElementById("userForm").addEventListener("submit", async function (event) {
+      event.preventDefault(); // Hindrer at siden refresher
+
+      // Les verdier fra input-feltene
+      const newUser = {
+        firstName: document.getElementById("firstName").value,
+        lastName: document.getElementById("lastName").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        password: document.getElementById("password").value
+      };
+
+      // Send POST-forespørsel til backend
+      try {
+        const response = await fetch("http://localhost:8081/api/users", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newUser)
+        });
+
+        if (!response.ok) {
+          throw new Error("Feil ved lagring av bruker");
+        }
+
+        const result = await response.json();
+        alert("Bruker lagret! ID: " + result.id);
+      } catch (error) {
+        console.error(error);
+        alert("Kunne ikke lagre bruker");
+      }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Brukeroversikt</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Liste over brukere</h1>
+<table id="co_living-table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Navn</th>
+        <th>Adresse</th>
+    </tr>
+    </thead>
+    <tbody id="co_living-body">
+    <!-- Fylles automatisk av JavaScript -->
+    </tbody>
+</table>
+
+<script>
+    // Koble til backend-API
+ fetch("http://localhost:8081/api/coLivings")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Feil ved lasting av data");
+        }
+        return response.json();
+      })
+      .then(coLivings => {
+        const tbody = document.getElementById("co_living-body");
+
+        // Tøm eksisterende rader (bare for sikkerhet)
+        tbody.innerHTML = "";
+
+        // Fyll tabellen med brukere
+        coLivings.forEach(co_living => {
+          const row = document.createElement("tr");
+
+          row.innerHTML = `
+            <td>${co_living.id}</td>
+            <td>${co_living.name}</td>
+            <td>${co_living.address}</td>
+          `;
+
+          tbody.appendChild(row);
+        });
+      })
+      .catch(error => {
+        console.error("Klarte ikke å hente kollektiver:", error);
+      });
+</script>
+</body>
+</html>
