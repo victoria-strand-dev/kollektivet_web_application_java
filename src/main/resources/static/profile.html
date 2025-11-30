@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="hus_logo.png">
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+<ul class="top_bar">
+    <li><a href="home.html">Hjem</a></li>
+    <li><a href="profile.html">Profil</a></li>
+    <li><a href="settings.html">Innstillinger</a></li>
+</ul>
+
+<div class="main">
+    <ul class="side_bar">
+        <li><a href="calendar.html">Kalender</a></li>
+        <li><a href="create_coLiving.html">Opprett kollektiv</a></li>
+        <li><a href="join_coLiving.html">Bli med i et kollektiv</a></li>
+        <li><a href="coLivings.html">Oversikt over brukere og kollektiv</a></li>
+    </ul>
+
+    <div class="content">
+        <h2>Oppdater profil</h2>
+        <div class="update_container">
+            <form id="updateForm">
+                <input id="firstName"  type="text"    placeholder="Fornavn">
+                <input id="lastName"   type="text"    placeholder="Etternavn">
+                <input id="phone"      type="text"    placeholder="Telefonnummer">
+                <input id="email"      type="text"    placeholder="E-post">
+                <input id="study"      type="text"    placeholder="Hva studerer du?">
+                <input id="work"       type="text"    placeholder="Hvor jobber du?">
+                <input id="password"   type="password" placeholder="Passord">
+                <button type="submit">Oppdater</button>
+            </form>
+            <script>
+                document.getElementById("updateForm").addEventListener("submit", async function (event) {
+                    event.preventDefault();
+
+                    const updateUser = {};
+
+                    if (firstName.value) updateUser.firstName = firstName.value;
+                    if (lastName.value) updateUser.lastName = lastName.value;
+                    if (phone.value) updateUser.phone = phone.value;
+                    if (email.value) updateUser.email = email.value;
+                    if (study.value) updateUser.study = study.value;
+                    if (work.value) updateUser.work = work.value;
+                    if (password.value) updateUser.password = password.value;
+
+                    try {
+                        const sessionResponse = await fetch("http://localhost:8081/api/login_out/session", {
+                            credentials: "include"
+                        });
+
+                        if (!sessionResponse.ok) throw new Error("Kunne ikke hente session");
+
+                        const sessionData = await sessionResponse.json();
+                        console.log("Session info:", sessionData);
+
+                        const userId = sessionData.userId;
+                        if (!userId) {
+                            alert("Det er ingen bruker innlogget");
+                            return;
+                        }
+
+                        const response = await fetch(`http://localhost:8081/api/users/${userId}`, {
+                            method: "PUT",
+                            credentials: "include",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(updateUser)
+                        });
+
+                        if (!response.ok) throw new Error("Feil ved oppdatering av bruker");
+
+                        const result = await response.json();
+                        alert("Bruker oppdatert! ID: " + result.id);
+
+                    } catch (error) {
+                        console.error(error);
+                        alert("Kunne ikke oppdatere bruker");
+                    }
+                });
+            </script>
+        </div>
+    </div>
+</div>
+
+<ul class="bottom_bar">
+    <li><a id="logoutBtn" href="#">Logg ut</a></li>
+</ul>
+<script>
+    document.getElementById("logoutBtn").addEventListener("click", async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch("http://localhost:8081/api/login_out/logout", {
+                method: "POST",
+                credentials: "include"
+            });
+
+            const result = await response.text();
+            alert(result);
+
+            window.location.href = "index.html";
+
+        } catch (err) {
+            console.error("Feil:", err);
+            alert("Kunne ikke logge ut");
+        }
+    });
+</script>
+</body>
+</html>

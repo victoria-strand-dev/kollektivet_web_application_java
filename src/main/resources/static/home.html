@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+<ul class="top_bar">
+    <li><a href="profile.html">Profil</a></li>
+    <li><a href="settings.html">Innstillinger</a></li>
+</ul>
+
+<div class="main">
+    <ul class="side_bar">
+        <li><a href="calendar.html">Kalender</a></li>
+        <li><a href="create_coLiving.html">Opprett kollektiv</a></li>
+        <li><a href="join_coLiving.html">Bli med i et kollektiv</a></li>
+        <li><a href="coLivings.html">Oversikt over brukere og kollektiv</a></li>
+        <li><a href="in_progress.html">Chat</a></li>
+        <li><a href="in_progress.html">Vaskeliste</a></li>
+        <li><a href="in_progress.html">Husregler</a></li>
+        <li><a href="in_progress.html">Oppgjør</a></li>
+        <li><a href="in_progress.html">Beboere</a></li>
+        <li><a href="in_progress.html">Handleliste</a></li>
+    </ul>
+
+    <div class="content">
+        <div class="index">
+            <img src="logo.png" alt="Logo">
+        </div>
+    </div>
+</div>
+
+<ul class="bottom_bar">
+    <li><a id="logoutBtn" href="#">Logg ut</a></li>
+</ul>
+<script>
+    document.getElementById("logoutBtn").addEventListener("click", async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch("http://localhost:8081/api/login_out/logout", {
+                method: "POST",
+                credentials: "include"
+            });
+
+            const result = await response.text();
+            alert(result);
+
+            window.location.href = "index.html";
+
+        } catch (err) {
+            console.error("Feil:", err);
+            alert("Kunne ikke logge ut");
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>CoLlivings information</title>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="coLivings.css">
+</head>
+<body>
+<ul class="top_bar">
+    <li><a href="home.html">Hjem</a></li>
+    <li><a href="profile.html">Profil</a></li>
+    <li><a href="settings.html">Innstillinger</a></li>
+</ul>
+
+<div class="main">
+    <ul class="side_bar">
+        <li><a href="calendar.html">Kalender</a></li>
+        <li><a href="create_coLiving.html">Opprett kollektiv</a></li>
+        <li><a href="join_coLiving.html">Bli med i et kollektiv</a></li>
+    </ul>
+
+    <div class="content">
+        <div class="coLivings">
+<h2>Liste over brukere og kollektiver</h2>
+
+<table id="user-table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Fornavn</th>
+        <th>Etternavn</th>
+        <th>E-post</th>
+        <th>Telefon</th>
+        <th>Studie</th>
+        <th>Jobb</th>
+        <th>Bursdag</th>
+        <th>Kollektiv</th>
+    </tr>
+    </thead>
+    <tbody id="user-body">
+    <!-- Fylles automatisk av JavaScript -->
+    </tbody>
+</table>
+
+<table id="co_living-table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Navn</th>
+        <th>Adresse</th>
+        <th>Invitasjonskode</th>
+    </tr>
+    </thead>
+    <tbody id="co_living-body">
+    <!-- Fylles automatisk av JavaScript -->
+    </tbody>
+</table>
+
+<script>
+    fetch("http://localhost:8081/api/users")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Feil ved lasting av data");
+            }
+            return response.json();
+        })
+        .then(users => {
+            const tbody = document.getElementById("user-body");
+
+            tbody.innerHTML = "";
+
+            users.forEach(user => {
+                const row = document.createElement("tr");
+
+                row.innerHTML = `
+            <td>${user.id}</td>
+            <td>${user.firstName}</td>
+            <td>${user.lastName}</td>
+            <td>${user.email}</td>
+            <td>${user.phone}</td>
+            <td>${user.study}</td>
+            <td>${user.work}</td>
+            <td>${user.birthday}</td>
+            <td>${user.coLivingId ?? "—"}</td>
+          `;
+
+                tbody.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error("Klarte ikke å hente brukere:", error);
+        });
+
+    fetch("http://localhost:8081/api/coLivings")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Feil ved lasting av data");
+            }
+            return response.json();
+        })
+        .then(coLivings => {
+            const tbody = document.getElementById("co_living-body");
+
+            tbody.innerHTML = "";
+
+            coLivings.forEach(co_living => {
+                const row = document.createElement("tr");
+
+                row.innerHTML = `
+            <td>${co_living.id}</td>
+            <td>${co_living.name}</td>
+            <td>${co_living.address}</td>
+            <td>${co_living.inviteCode}</td>
+          `;
+
+                tbody.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error("Klarte ikke å hente kollektiver:", error);
+        });
+</script>
+        </div>
+    </div>
+</div>
+
+<ul class="bottom_bar">
+    <li><a id="logoutBtn" href="#">Logg ut</a></li>
+</ul>
+<script>
+    document.getElementById("logoutBtn").addEventListener("click", async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch("http://localhost:8081/api/login_out/logout", {
+                method: "POST",
+                credentials: "include"
+            });
+
+            const result = await response.text();
+            alert(result);
+
+            window.location.href = "index.html";
+
+        } catch (err) {
+            console.error("Feil:", err);
+            alert("Kunne ikke logge ut");
+        }
+    });
+</script>
+</html>
