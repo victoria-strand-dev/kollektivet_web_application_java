@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="hus_logo.png">
+    <link rel="stylesheet" href="calendar.css">
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+<!-- TOP BAR -->
+<ul class="top_bar">
+    <li><a href="home.html">Hjem</a></li>
+    <li><a href="profile.html">Profil</a></li>
+    <li><a href="settings.html">Innstillinger</a></li>
+</ul>
+
+<div class="menu">
+    <ul class="side_bar">
+        <li><a href="create_coLiving.html">Opprett kollektiv</a></li>
+        <li><a href="join_coLiving.html">Bli med i et kollektiv</a></li>
+        <li><a href="coLivings.html">Oversikt over brukere og kollektiv</a></li>
+    </ul>
+
+    <div class="content">
+        <div class="month">
+            <ul>
+                <li class="prev">&#10094;</li>
+                <li>
+                    <span id="month-name"></span><br>
+                    <span id="year" style="font-size:18px"></span>
+                </li>
+                <li class="next">&#10095;</li>
+            </ul>
+        </div>
+
+        <ul class="weekdays">
+            <li>Mandag</li>
+            <li>Tirsdag</li>
+            <li>Onsdag</li>
+            <li>Torsdag</li>
+            <li>Fredag</li>
+            <li>Lørdag</li>
+            <li>Søndag</li>
+        </ul>
+
+        <ul class="days">
+        </ul>
+        <h2>Legg til en hendelse</h2>
+        <div class="create_event">
+            <form id="newEventForm">
+                <input id="title"      type="text"   placeholder="Tittel">
+                <input id="description" type="text" placeholder="Beskrivelse">
+                <input id="date" type="date" placeholder="Dato">
+                <input id="startTime" type="time" placeholder="Starter">
+                <input id="endTime" type="time" placeholder="Slutter">
+                <input id="location" type="text" placeholder="Sted">
+                <button type="submit" type="register_event">Legg til</button>
+            </form>
+            <script>
+                const daysContainer = document.querySelector(".days");
+                const monthNameEl = document.getElementById("month-name");
+                const yearEl = document.getElementById("year");
+
+                let cachedEvents = [];
+
+                async function fetchCalendarMeta() {
+                    const response = await fetch("http://localhost:8081/api/calendar/current");
+                    if (!response.ok) {
+                        throw new Error("Feil ved henting av kalender-metadata");
+                    }
+                    return await response.json();
+                }
+
+                async function fetchEvents() {
+                    const response = await fetch("http://localhost:8081/api/calendar/events");
+                    if (!response.ok) {
+                        throw new Error("Feil ved henting av hendelser");
+                    }
+                    return await response.json();
+                }
+
+                function getDayFromDateString(dateStr) {
+                    if (!dateStr) return null;
+                    const parts = dateStr.split("-");
+                    if (parts.length !== 3) return null;
+                    return parseInt(parts[2], 10);
+                }
+
+                async function renderCalendar() {
+                    try {
+                        const [meta, events] = await Promise.all([
+                            fetchCalendarMeta(),
+                            fetchEvents()
+                        ]);
+
+                        cachedEvents = events;
+
+                        monthNameEl.textContent = meta.monthName;
+                        yearEl.textContent = meta.year;
+
+                        daysContainer.innerHTML = "";
+
+                        const offset = (meta.firstDayOfWeek + 6) % 7;
+
+                        for (let i = 0; i < offset; i++) {
+                            const emptyLi = document.createElement("li");
+                            emptyLi.classList.add("empty");
+                            daysContainer.appendChild(emptyLi);
+                        }
+
+                        for (let day = 1; day <= meta.daysInMonth; day++) {
+                            const li = document.createElement("li");
+                            li.dataset.day = String(day);
+
+                            const daySpan = document.createElement("span");
+                            daySpan.classList.add("day-number");
+                            daySpan.textContent = day;
+                            li.appendChild(daySpan);
+
+                            if (day === meta.todayDayOfMonth) {
+                                li.classList.add("today");
+                            }
+
+                            const eventsForDay = events.filter(ev => getDayFromDateString(ev.date) === day);
+
+                            if (eventsForDay.length > 0) {
+                                li.classList.add("has-event");
+                            }
+
+                            daysContainer.appendChild(li);
+                        }
+
+                    } catch (error) {
+                        console.error("Klarte ikke å rendre kalender:", error);
+                    }
+                }
+
+                daysContainer.addEventListener("click", function (e) {
+                    const li = e.target.closest("li[data-day]");
+                    if (!li) return;
+
+                    const day = parseInt(li.dataset.day, 10);
+
+                    const eventsForDay = cachedEvents.filter(ev => getDayFromDateString(ev.date) === day);
+
+                    if (eventsForDay.length > 0) {
+                        li.classList.add("has-event");
+                    }
+
+                    const message = eventsForDay.map(ev => {
+                        return (
+                            "Tittel: " + (ev.title ?? "") + "\n" +
+                            "Dato: " + (ev.date ?? "") + "\n" +
+                            "Start: " + (ev.startTime ?? "") + "\n" +
+                            "Slutt: " + (ev.endTime ?? "") + "\n" +
+                            "Sted: " + (ev.location ?? "") + "\n" +
+                            "Beskrivelse: " + (ev.description ?? "")
+                        );
+                    }).join("\n\n------------------\n\n");
+
+                    alert(message);
+                });
+
+                renderCalendar();
+            </script>
+
+            <script>
+                document.getElementById("newEventForm").addEventListener("submit", async function (event) {
+                  event.preventDefault();
+
+                  const newEvent = {
+                    title: document.getElementById("title").value,
+                    description: document.getElementById("description").value,
+                    date: document.getElementById("date").value,
+                    startTime: document.getElementById("startTime").value,
+                    endTime: document.getElementById("endTime").value,
+                    location: document.getElementById("location").value
+                  };
+
+                  try {
+                    const response = await fetch("http://localhost:8081/api/calendar/events", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify(newEvent)
+                    });
+
+                    if (!response.ok) {
+                      throw new Error("Feil ved lagring av hendelse");
+                    }
+
+                    const result = await response.json();
+                    alert("Hendelse lagret!");
+                  } catch (error) {
+                    console.error(error);
+                    alert("Kunne ikke lagre hendelse");
+                  }
+                });
+            </script>
+        </div>
+    </div>
+</div>
+
+<ul class="bottom_bar">
+    <li><a id="logoutBtn" href="#">Logg ut</a></li>
+</ul>
+<script>
+    document.getElementById("logoutBtn").addEventListener("click", async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch("http://localhost:8081/api/login_out/logout", {
+                method: "POST",
+                credentials: "include"
+            });
+
+            const result = await response.text();
+            alert(result);
+
+            window.location.href = "index.html";
+
+        } catch (err) {
+            console.error("Feil:", err);
+            alert("Kunne ikke logge ut");
+        }
+    });
+</script>
+</body>
+</html>

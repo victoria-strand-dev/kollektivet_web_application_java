@@ -1,0 +1,41 @@
+:root {
+    --dark_blue: #486273;
+    --mid_blue: #7EA1BF;
+    --light_blue: #A0CCF2;
+    --white: #F2F2F2;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background: var(--light_blue);
+    padding-top: 100px;
+}
+
+img {
+    display: block;
+    margin: auto;
+    width: 50%;
+    min-width: 500px;
+}
+
+.main {
+    flex: 1;
+    display: flex;
+}
+
+.content {
+    flex: 1;
+    display: flex;                
+    flex-direction: column;     
+    padding-top: 100px;
+    background: var(--light_blue);
+    color: var(--dark_blue);
+    text-align: center;          
+}

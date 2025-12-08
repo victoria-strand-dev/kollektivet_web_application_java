@@ -1,0 +1,55 @@
+h1, h2, p {
+    text-align: center;
+    color: var(--dark_blue);
+}
+
+input {
+    display: block;
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid var(--dark_blue);
+    border-radius: 5px;
+
+}
+
+button {
+    display: block;
+    width: 95%;
+    margin: 10px auto;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--dark_blue);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.join_kollektiv {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid var(--dark_blue);
+    border-radius: 15px;
+    box-shadow: 0.5 0.5 10px rgba(0, 0, 0, 0.1);
+    color: var(--dark_blue);
+    background-color: var(--mid_blue);
+}
+
+.main {
+    flex: 1;
+    display: flex;
+}
+
+.content {
+    flex: 1;
+    display: flex;                
+    flex-direction: column;     
+    justify-content: center;       
+    align-items: center;          
+    padding: 20px;
+    background: var(--white);
+    color: var(--dark_blue);
+    text-align: center;          
+}

@@ -1,0 +1,53 @@
+.coLivings {
+    min-width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid var(--dark_blue);
+    border-radius: 15px;
+    box-shadow: 0.5 0.5 10px rgba(0, 0, 0, 0.1);
+    color: var(--dark_blue);
+    background-color: var(--mid_blue);
+}
+
+.main {
+    flex: 1;
+    display: flex;
+}
+
+.content {
+    flex: 1;
+    display: flex;            
+    flex-direction: column;      
+    justify-content: center;     
+    align-items: center;          
+    padding: 20px;
+    background: var(--white);
+    color: var(--dark_blue);
+    text-align: center;         
+}
+
+table {
+    margin: 20px auto;
+    border-collapse: collapse;
+    width: 80%;
+    background-color: var(--light_blue);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    border: 1px solid var(--mid_blue);
+    padding: 10px 15px;
+}
+
+th {
+    background-color: var(--dark_blue);
+    color: var(--white);
+}
+
+tr:nth-child(even) {
+    background-color: var(--light_blue);
+}
+
+tbody {
+    color: var(--dark_blue);
+}

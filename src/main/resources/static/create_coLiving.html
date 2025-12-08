@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create coliving</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="hus_logo.png">
+    <link rel="stylesheet" href="create_coLiving.css">
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+<ul class="top_bar">
+    <li><a href="home.html">Hjem</a></li>
+    <li><a href="profile.html">Profil</a></li>
+    <li><a href="settings.html">Innstillinger</a></li>
+</ul>
+
+<div class="main">
+    <ul class="side_bar">
+        <li><a href="calendar.html">Kalender</a></li>
+        <li><a href="join_coLiving.html">Bli med i et kollektiv</a></li>
+        <li><a href="coLivings.html">Oversikt over brukere og kollektiv</a></li>
+    </ul>
+
+    <div class="content">
+        <div class="create_kollektiv">
+            <h2>Opprett kollektiv</h2>
+            <form id="newCoLivingForm">
+                <input id="name"      type="text"   placeholder="Navn på kollektiv">
+                <input id="address" type="text" placeholder="Adresse">
+                <button>Opprett kollektiv</button>
+            </form>
+            <script>
+                document.getElementById("newCoLivingForm").addEventListener("submit", async function (event) {
+                  event.preventDefault();
+
+                  const newCoLiving = {
+                    name: document.getElementById("name").value,
+                    address: document.getElementById("address").value
+                  };
+
+                  try {
+                    const response = await fetch("http://localhost:8081/api/coLivings", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify(newCoLiving)
+                    });
+
+                    if (!response.ok) {
+                      throw new Error("Feil ved lagring av kollektiv");
+                    }
+
+                    const result = await response.json();
+                    alert("Kollektiv lagret!");
+                  } catch (error) {
+                    console.error(error);
+                    alert("Kunne ikke lagre kollektiv");
+                  }
+                });
+            </script>
+        </div>
+    </div>
+</div>
+
+<ul class="bottom_bar">
+    <li><a id="logoutBtn" href="#">Logg ut</a></li>
+</ul>
+<script>
+    document.getElementById("logoutBtn").addEventListener("click", async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch("http://localhost:8081/api/login_out/logout", {
+                method: "POST",
+                credentials: "include"
+            });
+
+            const result = await response.text();
+            alert(result);
+
+            window.location.href = "index.html";
+
+        } catch (err) {
+            console.error("Feil:", err);
+            alert("Kunne ikke logge ut");
+        }
+    });
+</script>
+</body>
+</html>

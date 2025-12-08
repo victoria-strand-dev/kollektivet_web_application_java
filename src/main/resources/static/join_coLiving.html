@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Join coliving</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="hus_logo.png">
+    <link rel="stylesheet" href="join_coLiving.css">
+    <link rel="stylesheet" href="common.css">
+</head>
+
+<body>
+<ul class="top_bar">
+    <li><a href="home.html">Hjem</a></li>
+    <li><a href="profile.html">Profil</a></li>
+    <li><a href="settings.html">Innstillinger</a></li>
+</ul>
+
+<div class="main">
+    <ul class="side_bar">
+        <li><a href="calendar.html">Kalender</a></li>
+        <li><a href="create_coLiving.html">Opprett kollektiv</a></li>
+        <li><a href="coLivings.html">Oversikt over brukere og kollektiv</a></li>
+    </ul>
+
+    <div class="content">
+        <div class="join_kollektiv">
+            <h2>Delta i et kollektiv</h2>
+            <form id="joinForm">
+                <label>
+                    Invitasjonskode:
+                    <input type="text" id="inviteCode" required>
+                </label><br>
+
+                <label>
+                    E-postadresse:
+                    <input type="email" id="email" required>
+                </label><br>
+
+                <button type="submit">Bli med</button>
+            </form>
+            <script>
+                document.getElementById("joinForm").addEventListener("submit", async (e) => {
+                  e.preventDefault();
+
+                  const inviteCode = document.getElementById("inviteCode").value.trim();
+                  const email = document.getElementById("email").value.trim();
+
+                  try {
+                    const response = await fetch(`http://localhost:8081/api/coLivings/joinByEmail?inviteCode=${inviteCode}&email=${email}`, {
+                      method: "POST"
+                    });
+
+                    const text = await response.text();
+                    alert(text);
+                  } catch (err) {
+                    console.error("Feil:", err);
+                    alert("Kunne ikke koble til serveren");
+                  }
+                });
+            </script>
+        </div>
+    </div>
+</div>
+
+<ul class="bottom_bar">
+    <li><a id="logoutBtn" href="#">Logg ut</a></li>
+</ul>
+<script>
+    document.getElementById("logoutBtn").addEventListener("click", async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch("http://localhost:8081/api/login_out/logout", {
+                method: "POST",
+                credentials: "include"
+            });
+
+            const result = await response.text();
+            alert(result);
+
+            window.location.href = "index.html";
+
+        } catch (err) {
+            console.error("Feil:", err);
+            alert("Kunne ikke logge ut");
+        }
+    });
+</script>
+</body>
+</html>

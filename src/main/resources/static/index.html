@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="hus_logo.png">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<ul class="top_bar">
+    <li><a href="home.html">Gå til hjemsiden uten å logge inn</a></li>
+</ul>
+<header>
+    <img src="logo.png" alt="Logo">
+</header>
+
+<div class="main">
+    <div class="content">
+        <h2>Logg inn</h2>
+        <div class="login_register_container">
+            <form id="loginForm" method="">
+                <input id="emailLogin" type="email" placeholder="e-post">
+                <input id="passwordLogin" type="password" placeholder="Passord">
+                <button type="submit">Logg inn</button>
+            </form>
+            <h2>eller</h2>
+
+            <button id="showRegisterBtn" type="button">Registrer ny bruker</button>
+            <form id="registerForm" method="POST" style="display:none;">
+                <input id="email"      type="email"   placeholder="e-post">
+                <input id="phone"      type="text"    placeholder="Telefonnummer">
+                <input id="password"   type="password" placeholder="Passord">
+                <input id="firstName"  type="text"    placeholder="Fornavn">
+                <input id="lastName"   type="text"    placeholder="Etternavn">
+                <input id="birthday"   type="date"    placeholder="Fødselsdato">
+                <input id="study"      type="text"    placeholder="Hva studerer du?">
+                <input id="work"       type="text"    placeholder="Hvor jobber du?">
+                <button type="submit">Registrer</button>
+            </form>
+            <script>
+                document.getElementById("loginForm").addEventListener("submit", async (e) => {
+                    e.preventDefault();
+
+                    const email = document.getElementById("emailLogin").value.trim();
+                    const password = document.getElementById("passwordLogin").value.trim();
+
+                    try {
+                        const response = await fetch("http://localhost:8081/api/login_out/login", {
+                            method: "POST",
+                            credentials: "include",
+                            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                            body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+                        });
+
+                        const result = await response.text();
+                        if (result.includes("Innlogging vellykket")) {
+                            window.location.href = "home.html";
+                        } else {
+                            alert(result);
+                        }
+
+                    } catch (err) {
+                        console.error("Feil:", err);
+                        alert("Kunne ikke koble til serveren");
+                    }
+                });
+            </script>
+            <script>
+                const btn = document.getElementById("showRegisterBtn");
+                const regForm = document.getElementById("registerForm");
+
+                btn.addEventListener("click", () => {
+                    if (regForm.style.display === "none") {
+                        regForm.style.display = "block";
+                        btn.textContent = "Skjul registrering";
+                    } else {
+                        regForm.style.display = "none";
+                        btn.textContent = "Registrer ny bruker";
+                    }
+                });
+            </script>
+            <script>
+                document.getElementById("registerForm").addEventListener("submit", async function (event) {
+                    event.preventDefault();
+
+                    const newUser = {
+                        email: document.getElementById("email").value,
+                        phone: document.getElementById("phone").value,
+                        password: document.getElementById("password").value,
+                        firstName: document.getElementById("firstName").value,
+                        lastName: document.getElementById("lastName").value,
+                        birthday: document.getElementById("birthday").value,
+                        work: document.getElementById("work").value,
+                        study: document.getElementById("study").value
+                    };
+
+                    try {
+                        const response = await fetch("http://localhost:8081/api/users", {
+                            method: "POST",
+                            credentials: "include",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(newUser)
+                        });
+
+                        if (!response.ok) {
+                            throw new Error("Feil ved lagring av bruker");
+                        }
+
+                        const result = await response.json();
+                        alert("Bruker lagret! ID: " + result.id);
+                    } catch (error) {
+                        console.error(error);
+                        alert("Kunne ikke lagre bruker");
+                    }
+                });
+            </script>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
