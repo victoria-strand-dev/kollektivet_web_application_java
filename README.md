@@ -114,3 +114,7 @@ There's 4 steps:
 - upload frontend changes to FTP webhotel (remember to save all edited files)
 - deploy on render (remember to have pushed all changes)
 - open tittentei.eu (remember to hardfresh all sites if necessary)
+
+# Changes I want to do next:
+Fix the part that makes it possible to get access to home.html etc. without actually loggin in, but just changing the URL. 
+Add more sites/functionalities (examples are listet as "empty" links on the home page).
