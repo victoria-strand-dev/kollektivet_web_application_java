@@ -17,7 +17,15 @@ import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping({"/api/login_out"})
-@CrossOrigin(origins = "http://localhost:8081", allowCredentials = "true")
+@CrossOrigin(
+    origins = {
+        "http://localhost:8081",
+        "https://kollektivet-backend.onrender.com",
+        "https://dittdomene.no",
+        "https://www.dittdomene.no"
+    },
+    allowCredentials = "true"
+)
 
 public class LoginController {
 

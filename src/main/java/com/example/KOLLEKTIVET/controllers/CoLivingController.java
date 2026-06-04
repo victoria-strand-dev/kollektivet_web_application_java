@@ -13,7 +13,15 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/coLivings")
-@CrossOrigin(origins = "*") 
+@CrossOrigin(
+    origins = {
+        "http://localhost:8081",
+        "https://kollektivet-backend.onrender.com",
+        "https://dittdomene.no",
+        "https://www.dittdomene.no"
+    },
+    allowCredentials = "true"
+) 
 public class CoLivingController {
 
     @Autowired
