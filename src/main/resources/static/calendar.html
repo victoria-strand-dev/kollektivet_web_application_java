@@ -66,7 +66,7 @@
                 let cachedEvents = [];
 
                 async function fetchCalendarMeta() {
-                    const response = await fetch("http://localhost:8081/api/calendar/current");
+                    const response = await fetch("https://kollektivet-backend.onrender.com/api/calendar/login");
                     if (!response.ok) {
                         throw new Error("Feil ved henting av kalender-metadata");
                     }
@@ -74,7 +74,7 @@
                 }
 
                 async function fetchEvents() {
-                    const response = await fetch("http://localhost:8081/api/calendar/events");
+                    const response = await fetch("https://kollektivet-backend.onrender.com/api/calendar/events");
                     if (!response.ok) {
                         throw new Error("Feil ved henting av hendelser");
                     }
@@ -180,7 +180,7 @@
                   };
 
                   try {
-                    const response = await fetch("http://localhost:8081/api/calendar/events", {
+                    const response = await fetch("https://kollektivet-backend.onrender.com/api/calendar/events", {
                       method: "POST",
                       headers: { "Content-Type": "application/json" },
                       body: JSON.stringify(newEvent)
@@ -210,7 +210,7 @@
         e.preventDefault();
 
         try {
-            const response = await fetch("http://localhost:8081/api/login_out/logout", {
+            const response = await fetch("https://kollektivet-backend.onrender.com/api/login_out/logout", {
                 method: "POST",
                 credentials: "include"
             });
