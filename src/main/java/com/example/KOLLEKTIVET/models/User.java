@@ -77,7 +77,7 @@ public class User {
     public void setCoLiving(CoLiving coLiving) {this.coLiving = coLiving;}
 
     @JsonProperty("coLivingId")
-    public Integer getCoLivingId() {
-        return coLiving != null ? coLiving.getId() : null;
+    public long getCoLivingId() {
+        return coLiving != null ? coLiving.getId() : 0;
     }
 }

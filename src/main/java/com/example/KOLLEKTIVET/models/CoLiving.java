@@ -28,7 +28,7 @@ public class CoLiving {
         this.inviteCode = inviteCode;
     }
 
-    public int getId() {return id;}
+    public long getId() {return id;}
 
     public String getName() {return name;}
     public void setName(String name) {this.name = name;}
