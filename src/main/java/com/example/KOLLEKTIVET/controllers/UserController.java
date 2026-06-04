@@ -12,9 +12,10 @@ import java.util.List;
 @CrossOrigin(
     origins = {
         "http://localhost:8081",
-        "https://kollektivet-backend.onrender.com",
-        "https://dittdomene.no",
-        "https://www.dittdomene.no"
+        "http://tittentei.eu",
+        "http://www.tittentei.eu",
+        "https://tittentei.eu",
+        "https://www.tittentei.eu"
     },
     allowCredentials = "true"
 )

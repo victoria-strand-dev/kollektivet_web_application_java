@@ -21,6 +21,16 @@ import java.util.Locale;
 
 @RestController
 @RequestMapping("/api/calendar")
+@CrossOrigin(
+    origins = {
+        "http://localhost:8081",
+        "http://tittentei.eu",
+        "http://www.tittentei.eu",
+        "https://tittentei.eu",
+        "https://www.tittentei.eu"
+    },
+    allowCredentials = "true"
+)
 public class CalendarController {
 
     @Autowired
