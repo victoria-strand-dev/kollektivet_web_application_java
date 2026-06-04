@@ -103,3 +103,12 @@ Today's goal: Use the session function I got to work last time, to fix the funct
 01.12.2025:
 I created a new project to switch from myNewBackend to KOLLEKTIVET, but when trying to merge the Main branch where the README-file was, and the Master branch that came with initiating git in the project, I overwrote everything in the Main branch. That included ALL commit history and the README-file. Fortunally I had saved a previous version of the README-file. I lost the last changes, but that was only for one day. What was the last change?
 The last change was from yesterday (30.11.2025) where I updated the progress. The last two days I have been trying to host the web application online, but hosting a Java web application with Spring Boot framework isn't as easy and standarized as for example PHP with no framework. Hosting the application with just frontend works, but not with the backend functionalities. I tried to use fly.io, suggested by ChatGPT and guided by ChatGPT, and it almost worked. The application was hosted, the backend worked (changed to PostgresSQL since regular MySQL didn't work (for me)), but the functionalities still wouldn't show up/work online. I therefore chose to stop trying to host the web application online with backend, and just host it as frontend, and rather show the backend functionalities thorugh the repport and demonstration video. Since everything works when testing locally. There's 100% possible to get this to work, but now I've tried for two whole days and the deadline is today, so I have to stop trying for now.
+
+
+04.06.2026:
+Figured out how to host both frontend and backend online on tittentei.eu.
+There's 4 steps:
+- set up database in Neon
+- upload frontend changes to FTP webhotel (remember to save all edited files)
+- deploy on render (remember to have pushed all changes)
+- open tittentei.eu (remember to hardfresh all sites if necessary)
