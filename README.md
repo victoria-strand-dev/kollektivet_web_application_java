@@ -1,7 +1,7 @@
 # kollektivet_web_application_java
 Web application project for the subject Webutvikling (web development): "Kollektivet" remake from PHP to Java.
 
-The backend doesn't work when hosting since Java and SprinBoot are not supported for hosting trough [DomeneShop](https://domene.shop/). The domain will be inactive as of November 28th.
+The backend doesn't work when hosting since Java and SprinBoot are not supported for hosting trough [DomeneShop](https://domene.shop/). The domain will be inactive as of November 28th 2026.
 
 # Open webapplication here: https://tittentei.eu/
 
